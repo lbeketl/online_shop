@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :product do
-    name { "MyString" }
-    description { "MyText" }
-    price { "9.99" }
-    balance { 1 }
+    name { Faker::Device.model_name }
+    description { Faker::Lorem.sentence(word_count: 3) }
+    price { Faker::Number.decimal(l_digits: 2) }
+    balance { Faker::Number.between(from: 1, to: 10) }
   end
 end
