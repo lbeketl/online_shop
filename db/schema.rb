@@ -15,8 +15,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_145557) do
   enable_extension "plpgsql"
 
   create_table "orders", force: :cascade do |t|
-    t.string "firstname", null: false
-    t.string "lastname", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "address", null: false
     t.string "phone", null: false
     t.datetime "created_at", null: false
@@ -35,9 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_145557) do
 
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description", null: false
-    t.decimal "price", precision: 5, scale: 2, null: false
-    t.integer "balance", null: false
+    t.text "description"
+    t.decimal "price", precision: 8, scale: 2, default: "0.0", null: false
+    t.integer "balance", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
