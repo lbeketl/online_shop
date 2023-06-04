@@ -1,0 +1,11 @@
+<% if object.errors.any? %>
+  <div class="p-4">
+    <ul class="list-disc">
+      <% object.errors.full_messages.each do |msg| %>
+        <li class="text-red-500 font-bold">
+          <%= msg %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<% flash.each do |type, msg| %>
+  <% if type == "success" %>
+    <div class="p-4 mb-4 text-sm rounded-lg bg-gray-800 text-green-400">
+      <span class="font-medium">
+        <%= msg %>
+      </span>
+    </div>
+  <% else %>
+    <div class="p-4 mb-4 text-sm rounded-lg bg-gray-800 text-red-400">
+      <span class="font-medium">
+        <%= msg %>
+      </span>
+    </div>
+  <% end %>
+<% end %>
