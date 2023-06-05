@@ -21,6 +21,11 @@
     </div>
     <div class="items-center justify-between">
       <ul class="flex p-4 font-medium rounded-lg bg-gray-900 border-gray-700">
+        <% if is_admin? %>
+          <li>
+            <%= link_to "Products", products_path, class: "py-2 pl-3 pr-4 text-white block bg-transparent hover:bg-blue-700 rounded" %>
+          </li>
+        <% end %>
         <li>
           <%= link_to "Pricing", "#", class: "py-2 pl-3 pr-4 text-white block bg-transparent hover:bg-blue-700 rounded" %>
         </li>
