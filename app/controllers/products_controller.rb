@@ -43,6 +43,36 @@ class ProductsController < ApplicationController
     flash[:notice] = "Product has been successfully deleted"
   end
 
+# Cart features
+  def add_to_cart
+    product_id = params[:product_id]
+    quantity = params[:quantity].to_i
+    current_cart[product_id] ||= 1
+    current_cart[product_id] += quantity
+    redirect_to root_path, notice: 'Product added to cart.'
+  end
+
+  def show_cart
+    @cart_items = []
+    current_cart.each do |product_id, quantity|
+      product = Product.find(product_id)
+      @cart_items << [product, quantity]
+    end
+  end
+
+  def update_quantity
+    product_id = params[:product_id]
+    quantity = params[:quantity].to_i
+    current_cart[product_id] = quantity if current_cart && current_cart[product_id]
+    redirect_to cart_path, notice: 'Cart updated.'
+  end
+
+  def remove_from_cart
+    product_id = params[:product_id]
+    current_cart.delete(product_id) if current_cart
+    redirect_to cart_path, notice: 'Product removed from cart.'
+  end
+
   private
 
   def product_params
