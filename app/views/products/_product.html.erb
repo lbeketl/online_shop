@@ -1,18 +1,18 @@
 <div
-  class="mx-auto w-[250px] border rounded-lg shadow bg-gray-800 border-gray-700 m-3"
+  class="mx-auto w-[400px] border rounded-lg shadow bg-gray-800 border-gray-700 m-3"
 >
   <%= link_to product_path(product) do %>
-    <%= image_tag "product-default.png", class: "w-[200px] h-[200px] mx-auto rounded-t-lg", alt: "product" %>
+    <%= image_tag "product-default.png", class: "w-[400px] h-[400px] mx-auto rounded-t-lg", alt: "product" %>
   <% end %>
   <div class="px-5 pb-5">
     <h5 class="text-xl font-semibold tracking-tight text-white">
       <%= product.name %>
     </h5>
     <h5 class="text-xl my-3 font-semibold tracking-tight text-white">
-      <%= product.description.truncate(15) %>
+      <%= product.description %>
     </h5>
     <h5 class="text-xl font-semibold tracking-tight text-gray-500">
-      $<%= product.price %>
+      <%= number_to_currency(product.price) %>
     </h5>
     <h5 class="text-xl my-3 font-semibold tracking-tight text-white">
       balance&nbsp;
