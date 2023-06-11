@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
   end
 
   def collection
-    Product.order(created_at: :desc)
+    Product.all
   end
 
   def resource

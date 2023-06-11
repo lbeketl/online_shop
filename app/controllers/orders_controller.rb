@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
   end
 
   def collection
-    Order.order(created_at: :desc)
+    Order.all
   end
 
   def resource
