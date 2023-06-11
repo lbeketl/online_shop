@@ -10,7 +10,7 @@ class Order < ApplicationRecord
 
   def total_sum
     product_orders.reduce(0) do |total, i|
-      total + i.amount * Product.find(i.product_id).price
+      total + i.amount * i.product.price
     end
   end
 

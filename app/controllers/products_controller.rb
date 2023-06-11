@@ -36,7 +36,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    current_cart[resource.id] && current_cart.delete(resource.id)
     resource.destroy
 
     redirect_to products_path, notice: "Product has been successfully deleted"
@@ -44,27 +43,23 @@ class ProductsController < ApplicationController
 
 # Cart features
   def add_to_cart
-    Products::CartManager.new(params: params, cart: current_cart).add_product
+    cart_manager.add
 
     redirect_to root_path, notice: 'Product added to cart.'
   end
 
   def show_cart
-    @cart_items = []
-    current_cart.each do |product_id, amount|
-      product = Product.find_by(id: product_id)
-      @cart_items << [product, amount]
-    end
+    @cart_items = cart_manager.cart_items
   end
 
   def update_amount
-    Products::CartManager.new(params: params, cart: current_cart).update_amount
+    cart_manager.update_amount
 
     redirect_to cart_path, notice: 'Cart updated.'
   end
 
   def remove_from_cart
-    current_cart.delete(params[:product_id]) if current_cart
+    cart_manager.remove
 
     redirect_to cart_path, notice: 'Product removed from cart.'
   end
@@ -81,5 +76,9 @@ class ProductsController < ApplicationController
 
   def resource
     collection.find(params[:id])
+  end
+
+  def cart_manager
+    Products::CartManager.new(params: params, cart: session[:cart])
   end
 end

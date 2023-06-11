@@ -1,25 +1,25 @@
-<div class="min-w-[30%] rounded-lg shadow-lg m-4 p-6 bg-gray-900 flex flex-col justify-between">
-  <dl class="min-w-full divide-y text-white divide-gray-700 bg-gray-900">
+<div class="min-w-fit rounded-lg shadow-lg m-4 p-6 bg-gray-900 flex flex-col justify-between">
+  <dl class="min-w-full text-white bg-gray-900 divide-y divide-gray-700">
     <div class="flex flex-col pb-3">
-      <dt class="mb-1 md:text-sm text-gray-400">Full name</dt>
+      <dt class="mb-1 text-gray-400 md:text-sm">Full name</dt>
       <dd class="text-sm font-semibold"><%= order.full_name %></dd>
     </div>
     <div class="flex flex-col py-3">
-      <dt class="mb-1 md:text-sm text-gray-400">Home address</dt>
+      <dt class="mb-1 text-gray-400 md:text-sm">Home address</dt>
       <dd class="text-sm font-semibold"><%= order.address %></dd>
     </div>
     <div class="flex flex-col pt-3 mb-4">
-      <dt class="mb-1 md:text-sm text-gray-400">Phone number</dt>
+      <dt class="mb-1 text-gray-400 md:text-sm">Phone number</dt>
       <dd class="text-sm font-semibold"><%= order.phone %></dd>
     </div>
     <div class="flex flex-col pt-3 mb-4">
-      <dt class="mb-1 md:text-sm text-gray-400">Order date</dt>
+      <dt class="mb-1 text-gray-400 md:text-sm">Order date</dt>
       <dd class="text-sm font-semibold"><%= order.created_at %></dd>
     </div>
   </dl>
-  <div class="relative rounded-lg mb-4">
+  <div class="relative mb-4 rounded-lg">
     <table class="min-w-full mx-auto text-sm text-left text-gray-400">
-      <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+      <thead class="text-xs text-gray-400 uppercase bg-gray-700">
         <tr>
           <th scope="col" class="px-6 py-3">Product name</th>
           <th scope="col" class="px-6 py-3">Amount</th>
@@ -28,8 +28,8 @@
       </thead>
       <tbody>
         <% order.product_orders.each do |i| %>
-          <tr class="border-b bg-gray-900 border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-gray-400">
+          <tr class="bg-gray-900 border-b border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap">
               <%= i.product.name %>
             </th>
             <td class="px-6 py-4"><%= i.amount %></td>
@@ -52,5 +52,5 @@
       </tfoot>
     </table>
   </div>
-  <%= button_to "Cansel order", order, method: :delete, class: "text-white mr-4 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-500 hover:bg-red-700 focus:ring-red-800" %>
+  <%= button_to "Cancel order", order, method: :delete, class: "btn-danger" %>
 </div>

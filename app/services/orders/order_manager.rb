@@ -1,4 +1,6 @@
 class Orders::OrderManager
+  attr_reader :order, :cart
+
   def initialize(order: {}, cart: {})
     @order = order
     @cart = cart
@@ -11,8 +13,4 @@ class Orders::OrderManager
   def check_cart_items
     cart.keys.count > 0 ? true : false
   end
-
-  private
-
-  attr_reader :order, :cart
 end
