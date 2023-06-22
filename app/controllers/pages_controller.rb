@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @products = Product.order(created_at: :desc)
+    @products = collection
   end
 
   def about
@@ -10,5 +10,11 @@ class PagesController < ApplicationController
   end
 
   def pricing
+  end
+
+  private
+
+  def collection
+    Product.ordered
   end
 end

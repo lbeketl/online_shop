@@ -12,18 +12,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if Orders::OrderManager.new(cart: session[:cart]).check_cart_items
-      @order = Order.new(order_params)
-      if @order.save
-        Orders::OrderManager.new(order: @order, cart: session[:cart]).create_product_orders
-        Carts::CartManager.new(session).clear_cart
+    @order = Order.new(order_params)
+    if @order.save
+      Orders::OrderManager.new(order: @order, cart: session[:cart]).create_product_orders
+      Carts::CartManager.new(session).clear_cart
 
-        redirect_to orders_path, notice: "Order #{@order.id} has been successfully created"
-      else
-        render :new, status: :unprocessable_entity
-      end
+      redirect_to order_path @order, notice: "Order #{@order.id} has been successfully created"
     else
-      redirect_to root_path, alert: "You cannot create an order because your shopping cart is empty! Please add some products to your cart!"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +31,7 @@ class OrdersController < ApplicationController
     @order = resource
     if @order.update(order_params)
 
-      redirect_to order_url(@order), notice: "Order has been successfully updated."
+      redirect_to order_path(@order), notice: "Order has been successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -55,7 +51,7 @@ class OrdersController < ApplicationController
   end
 
   def collection
-    Order.all
+    Order.ordered
   end
 
   def resource

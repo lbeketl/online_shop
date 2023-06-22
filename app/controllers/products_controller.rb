@@ -7,40 +7,6 @@ class ProductsController < ApplicationController
     @product = resource
   end
 
-  def new
-    @product = Product.new
-  end
-
-  def create
-    @product = Product.new(product_params)
-    if @product.save
-
-      redirect_to products_path, notice: "Product #{@product.name} has been successfully created"
-    else
-       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def edit
-    @product = resource
-  end
-
-  def update
-    @product = resource
-    if @product.update(product_params)
-
-      redirect_to product_url(@product), notice:  "Product has been successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    resource.destroy
-
-    redirect_to products_path, notice: "Product has been successfully deleted"
-  end
-
   private
 
   def product_params
@@ -48,7 +14,7 @@ class ProductsController < ApplicationController
   end
 
   def collection
-    Product.all
+    Product.ordered
   end
 
   def resource

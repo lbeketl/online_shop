@@ -4,7 +4,7 @@ class Order < ApplicationRecord
 
   validates :first_name, :last_name, :address, :phone, presence: true
 
-  default_scope { order(created_at: :desc) }
+  scope :ordered, -> { order(created_at: :desc) }
 
   def full_name
     "#{first_name} #{last_name}"
