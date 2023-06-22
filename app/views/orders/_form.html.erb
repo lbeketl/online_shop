@@ -1,4 +1,4 @@
-<%= simple_form_for order, html: { class: "form" } do |f| %>
+<%= simple_form_for order, url: orders_path, html: { class: "form" } do |f| %>
   <div class="mb-6">
     <%= f.input :first_name, label: "First name", label_html: { class: "form-label" }, input_html: { class: "form-input" }, error_html: { class: "form-input-error" } %>
   </div>

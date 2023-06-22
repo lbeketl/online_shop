@@ -7,16 +7,18 @@ class Order < ApplicationRecord
   scope :ordered, -> { order(created_at: :desc) }
 
   def full_name
-    "#{first_name} #{last_name}"
+    [first_name, last_name].join(" ")
   end
 
   def total_sum
-    product_orders.reduce(0) do |total, i|
-      total + i.amount * i.product.price
-    end
+    self.class.joins(product_orders: :product)
+              .where(id: id)
+              .sum('product_orders.amount * products.price')
   end
 
   def total_amount
-    product_orders.reduce(0) { |total, i| total + i.amount }
+    self.class.joins(:product_orders)
+            .where(id: id)
+            .sum(:amount)
   end
 end
