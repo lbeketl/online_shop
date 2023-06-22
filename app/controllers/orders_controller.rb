@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
       @order = Order.new(order_params)
       if @order.save
         Orders::OrderManager.new(order: @order, cart: session[:cart]).create_product_orders
-        session[:cart] = nil
+        Carts::CartManager.new(session).clear_cart
 
         redirect_to orders_path, notice: "Order #{@order.id} has been successfully created"
       else

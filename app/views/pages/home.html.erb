@@ -15,7 +15,7 @@
                 <span class="my-3 text-xl font-bold text-gray-500">
                   $<%= product.price %>
                 </span>
-                <%= button_to 'Add to Cart', add_to_cart_path(product.id), class: "btn-primary", method: :post %>
+                <%= button_to 'Add to Cart', cart_path(id: product.id), class: "btn-primary", method: :post %>
             </div>
         </div>
       </div>
