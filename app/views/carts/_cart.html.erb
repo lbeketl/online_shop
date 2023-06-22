@@ -1,6 +1,10 @@
-<% if items.count > 0 %>
+<% if items.count.zero? %>
+  <div class="p-4 mb-4 text-sm text-center rounded-lg bg-gray-800 text-white w-48 mx-auto mt-28">
+    Your Cart is empty
+  </div>
+<% else %>
   <div class="relative mb-4 rounded-lg">
-    <table class="min-w-[400px] mx-auto text-sm text-left text-gray-400">
+    <table class="min-w-max mx-auto text-sm text-left text-gray-400">
       <thead class="text-xs text-gray-400 uppercase bg-gray-700">
         <tr>
           <th scope="col" class="px-6 py-3">Product name</th>
@@ -18,15 +22,15 @@
             <td class="px-6 py-4">
               <%= amount %>
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 m-1.5">
               <%= number_to_currency(product.price * amount) %>
             </td>
-            <td class="flex items-center justify-between px-6 py-4">
-              <%= form_with(url: cart_path(product), class: "mr-[5px]", method: :put) do |f| %>
-                  <%= f.number_field :amount, min: 1, value: amount, class: "h-[30px] w-[65px] bg-transparent rounded-lg" %>
-                  <%= f.submit 'Update', class: "text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-[10px] py-[5px] mx-2" %>
+            <td class="flex items-center justify-between px-6 py-4 p-1">
+              <%= form_with(url: cart_path(product), class: "mr-2", method: :put) do |f| %>
+                <%= f.number_field :amount, min: 1, value: amount, class: "h-8 w-16 bg-transparent rounded-lg" %>
+                <%= f.submit 'Update', class: "text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-2.5 py-1 mx-2" %>
               <% end %>
-              <%= button_to "x",cart_path(product), method: :delete, class: "text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-[10px] py-[5px] mr-2" %>
+              <%= button_to "x",cart_path(product), method: :delete, class: "btn-danger px-2.5 py-1 mr-2" %>
             </td>
           </tr>
         <% end %>
@@ -46,9 +50,5 @@
         </tr>
       </tfoot>
     </table>
-  </div>
-<% else %>
-  <div class="p-4 mb-4 text-sm text-center rounded-lg bg-gray-800 text-white w-[200px] mx-auto mt-28">
-    Your Cart is empty
   </div>
 <% end %>

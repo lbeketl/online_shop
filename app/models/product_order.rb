@@ -6,5 +6,11 @@ class ProductOrder < ApplicationRecord
 
   def product_total_sum
     product.price * amount
+  #   self.class.joins(:product)
+  #             .where(id: id)
+  #             .select("product_orders.amount * products.price AS total_price")
+  #             .pluck(:total_price)
+  #             .first
   end
+
 end
