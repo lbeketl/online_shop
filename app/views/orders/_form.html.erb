@@ -1,0 +1,27 @@
+<%= simple_form_for order, url: orders_path, html: { class: "form" } do |f| %>
+  <div class="mb-6">
+    <%= f.input :first_name, label: "First name", label_html: { class: "form-label" }, input_html: { class: "form-input" }, error_html: { class: "form-input-error" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= f.input :last_name, label: "Last name", label_html: { class: "form-label" }, input_html: { class: "form-input" }, error_html: { class: "form-input-error" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= f.input :address, label: "Your address", label_html: { class: "form-label" }, input_html: { class: "form-input" }, error_html: { class: "form-input-error" } %>
+  </div>
+
+  <div class="mb-6">
+    <%= f.input :phone, inline_label: "Your phone", label_html: { class: "form-label" }, input_html: { class: "form-input" }, error_html: { class: "form-input-error" } %>
+  </div>
+  <div class="flex justify-between mb-6 text-white">
+    <span>Total</span>
+    <span>
+      <%= number_to_currency(product_total_sum) %>
+    </span>
+  </div>
+  <div class="flex justify-between">
+    <%= f.submit "Submit", class: "btn-success" %>
+    <%= link_to "Return to shop", root_path, class: "btn-primary" %>
+  </div>
+<% end %>

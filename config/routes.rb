@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  get 'pages/home'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :products, only: [:show, :index]
+  resources :orders, exept: :edit
 
-  # Defines the root path route ("/")
+  resources :carts do
+    get :show, on: :collection
+    post :create, on: :member
+    put :update, on: :member
+    delete :destroy, on: :member
+
+  end
+
   root "pages#home"
 end
