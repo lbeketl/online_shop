@@ -9,8 +9,4 @@ class Orders::OrderManager
   def create_product_orders
     cart.each { |product_id, amount| order.product_orders.create(product_id:, amount:) }
   end
-
-  def check_cart_items
-    cart.keys.count > 0 ? true : false
-  end
 end

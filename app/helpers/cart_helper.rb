@@ -5,11 +5,12 @@ module CartHelper
 
   def product_total_sum
     return 0 if session[:cart].count.zero?
-      s = 0
-      session[:cart].each do |product_id, quantity|
-        product = Product.find(product_id)
-        s+= product.price * quantity
-      end
-      s
+
+    s = 0
+    session[:cart].each do |product_id, quantity|
+      product = Product.find(product_id)
+      s+= product.price * quantity
+    end
+    s
   end
 end

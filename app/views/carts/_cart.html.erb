@@ -1,16 +1,18 @@
 <% if items.count.zero? %>
-  <div class="p-4 mb-4 text-sm text-center rounded-lg bg-gray-800 text-white w-48 mx-auto mt-28">
-    Your Cart is empty
+  <div class="flex flex-col items-center p-4 mb-4  w-96 mx-auto mt-10">
+    <%= image_tag "empty-cart.svg", class: "w-full" %>
+    <span class="text-md font-bold my-4 text-gray-900">Your cart is currently epty!</span>
+    <%= link_to "Go to shop", root_path, class: "btn-primary" %>
   </div>
 <% else %>
   <div class="relative mb-4 rounded-lg">
-    <table class="min-w-max mx-auto text-sm text-left text-gray-400">
+    <table class="w-2/3 mx-auto text-sm text-left text-gray-400">
       <thead class="text-xs text-gray-400 uppercase bg-gray-700">
         <tr>
           <th scope="col" class="px-6 py-3">Product name</th>
           <th scope="col" class="px-6 py-3">Amount</th>
           <th scope="col" class="px-6 py-3">Total price</th>
-          <th scope="col" class="px-6 py-3">Actions</th>
+          <th scope="col" class="px-6 py-3 text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -25,12 +27,12 @@
             <td class="px-6 py-4 m-1.5">
               <%= number_to_currency(product.price * amount) %>
             </td>
-            <td class="flex items-center justify-between px-6 py-4 p-1">
+            <td class="flex items-center justify-end px-6 py-4 p-1">
               <%= form_with(url: cart_path(product), class: "mr-2", method: :put) do |f| %>
-                <%= f.number_field :amount, min: 1, value: amount, class: "h-8 w-16 bg-transparent rounded-lg" %>
-                <%= f.submit 'Update', class: "text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-2.5 py-1 mx-2" %>
+                <%= f.number_field :amount, min: 1, value: amount, class: "h-10 w-32 bg-transparent rounded-lg" %>
+                <%= f.submit 'Update', class: "btn-success mx-2" %>
               <% end %>
-              <%= button_to "x",cart_path(product), method: :delete, class: "btn-danger px-2.5 py-1 mr-2" %>
+              <%= button_to "Remove",cart_path(product), method: :delete, class: "btn-danger mr-2" %>
             </td>
           </tr>
         <% end %>
@@ -45,7 +47,7 @@
             <%= number_to_currency(product_total_sum) %>
           </td>
           <td class="flex justify-end px-6 py-3">
-            <%= link_to "Order", new_order_path, class: "btn-success" %>
+            <%= link_to "Make an order", new_order_path, class: "btn-success w-52" %>
           </td>
         </tr>
       </tfoot>

@@ -5,12 +5,8 @@ class ProductOrder < ApplicationRecord
   validates :amount, numericality: { greater_than_or_equal_to: 1 }
 
   def product_total_sum
-    product.price * amount
-  #   self.class.joins(:product)
-  #             .where(id: id)
-  #             .select("product_orders.amount * products.price AS total_price")
-  #             .pluck(:total_price)
-  #             .first
+    self.class.joins(:product)
+              .where(id: id)
+              .sum("products.price * product_orders.amount")
   end
-
 end
